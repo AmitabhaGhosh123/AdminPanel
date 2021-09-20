@@ -294,3 +294,68 @@
     color: #000;
     border-color: transparent transparent #6A7070;
 }
+
+/* table styles */
+
+.table thead th {
+    border-bottom: none !important;
+}
+
+.table th {
+    border-top: none !important;
+    font-weight: 400;
+}
+
+/* end of table styles */
+
+.phx-alert-success {
+    top: 0px;
+    position: absolute;
+    right: 0px;
+    color: #fff;
+    z-index: 9999;
+    min-width: 18rem;
+    width: 430px;
+    min-height: 45px;
+    background: #009654 0% 0% no-repeat padding-box;
+    border: #009654;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 0px solid #009654;
+    opacity: 1;
+    font: normal normal 600 11px/16px Graphik;
+    border-radius: 0 !important;
+}
+
+.phx-alert-success>span {
+    display: inline-block;
+    font-size: .875rem;
+    padding: 5px 0;
+}
+
+.phx-alert-success>span>img {
+    width: 1.5rem;
+    margin-right: .5rem;
+}
+
+.phx-alert-success button.close span {
+    color: #ffffff;
+    font-size: 21px;
+    position: absolute;
+    top: 9px;
+    right: 12px;
+    font-weight: 400;
+    text-shadow: 0 0px 0 #ffffff;
+}
+
+.phx-alert-success button.close {
+    opacity: 1 !important;
+    outline: none !important;
+}
+
+.phx-alert-success span i {
+    font-size: 1.2rem;
+}
+
+.phx-alert-success span:focus, .phx-alert-danger span:focus, .phx-warning span:focus {
+    outline: none !important;
+}
