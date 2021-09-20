@@ -1,0 +1,23 @@
+.phx-dropdown-toggle::after {
+    display: inline-block;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+    position: absolute;
+    right: 8px;
+    top: 12px;
+}
+
+.taskstable {
+    position: relative;
+    top: 2rem;
+}
+
+.headerrow {
+    border: 1px solid #000;
+    background-color: #ccc;
+}

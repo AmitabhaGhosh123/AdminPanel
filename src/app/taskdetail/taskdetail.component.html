@@ -1,0 +1,117 @@
+<!-- start of editModal -->
+<div class="modal fade" #editModal id="editModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog phx-modal-task modal-dialog-centered" role="document">
+    <div class="modal-content phx-modal-content phx-modal-position">
+      <div class="modal-header">
+        <h5 class="modal-title task-title">Edit Task</h5>
+        <button aria-label="Close" class="rc-close" (click)="cancelEditTask()" data-dismiss="modal" type="button">
+          <span aria-hidden="true" class="sr-only">Close</span>
+        </button>
+      </div>
+      <div class="modal-body phx-modal-body">
+        <form name="EditTaskForm" #EditTaskForm="ngForm">
+          <div class="row">
+            <div class="form-group col-12 col-md-12">
+              <label for="TaskId">Task Id</label>
+              <input type="text" class="form-control phx-taskname" name="TaskId" #TaskId="ngModel" placeholder=""
+                [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedprioritization.TaskId" title="{{selectedprioritization.TaskId}}"/>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-12 col-md-12">
+              <label class="required" for="TaskName">Task Name</label>
+              <input type="text" class="form-control phx-taskname" name="TaskName" #TaskName="ngModel" placeholder="" required
+                [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedprioritization.TaskName" title="{{selectedprioritization.TaskName}}"/>
+              <span *ngIf="(TaskName.dirty || TaskName.touched || TaskName.untouched) && TaskName.invalid && TaskName.errors.required" class="phx-modal-error">
+                  Task Name is required
+              </span>
+              </div>
+          </div>
+          <div class="row">
+            <div class="form-group phx-mb col-12 col-md-12">
+              <label class="required" for="ProjectName">Project Name</label>
+              <div class="phx-dropdown dropdown">
+                <div class="form-control phx-form-control phx-dropdown-toggle dropdown-toggle" id="ProjectName" title="{{selectedprioritization.ProjectName}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="0">
+                  {{selectedprioritization.ProjectName}}
+                </div>
+                <div class="phx-dropdown-menu dropdown-menu" aria-labelledby="ProjectName">
+                  <div class="phx-drop-item" *ngFor="let optionvalue of taskservice.allProjects"
+                    (click)="editProject('Project', optionvalue)">
+                    <a class="phx-drop-item-header">
+                      {{optionvalue}}
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <span *ngIf="editProjectName == 'Select Project'" class="phx-modal-error">
+                Project Name is required
+              </span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group phx-mb col-12 col-md-12">
+              <label for="Comments">Comments</label>
+              <textarea type="text" class="phx-txtarea" name="Comments" #Comments="ngModel"
+              placeholder="" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedprioritization.Comments" title="{{selectedprioritization.Comments}}" rows="3">
+              </textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer phx-modal-footer">
+        <div class="row mb-20">
+          <input type="button" class="btn btn-secondary" data-dismiss="modal" value="Cancel" (click)="cancelEditTask()">
+          <input type="button" class="btn btn-primary" data-dismiss="modal" value="Save" [disabled]='!EditTaskForm.valid' (click)="saveUpdatedTask()">
+        </div>
+      </div>
+    </div>
+    <!-- modal-content -->
+  </div>
+  <!-- modal-dialog -->
+</div>
+<!--end of editModal -->
+
+<!-- start of table -->
+<div class="row">
+  <div class="col-12 mb-4 mb-lg-0">
+    <div class="table-responsive taskstable">
+      <table class="table">
+        <thead>
+          <tr class="headerrow">
+            <th>Task ID</th>
+            <th>Task Name</th>
+            <th>Project</th>
+            <th>Comments</th>
+            <th>Task Edit</th>
+            <th>Task Delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let task of taskservice.tasksList; let i = index">
+            <td>{{task.TaskId}}</td>
+            <td>{{task.TaskName}}</td>
+            <td>{{task.ProjectName}}</td>
+            <td>{{task.Comments}}</td>
+            <td>
+              <button (click)="editTask(task,i)">Edit</button>
+            </td>
+            <td>
+              <button (click)="deleteTask(i)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- end of table -->
+
+<!-- start of toaster success message block -->
+<div class="alert alert-success phx-alert-success alert-dismissible fade show" role="alert" *ngIf="successMessage">
+  <div><span>{{editSuccessMessage}}</span> </div>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="successClose()">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- end of toaster success message block -->
